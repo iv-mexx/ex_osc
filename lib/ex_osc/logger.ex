@@ -7,7 +7,7 @@ defmodule ExOsc.Logger do
   require Logger
 
   def start_logger do
-    pid = {__MODULE__, make_ref}
+    pid = {__MODULE__, make_ref()}
     :ok = GenEvent.add_handler(:osc_events, pid, [])
     {:ok, pid}
   end
