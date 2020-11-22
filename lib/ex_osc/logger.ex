@@ -17,8 +17,7 @@ defmodule ExOsc.Logger do
   end
 
   def handle_event(event, state) do
-    Logger.info "OSC: #{inspect event}"
+    Logger.info("OSC: #{inspect(event)}")
     {:ok, state}
   end
 end
-
