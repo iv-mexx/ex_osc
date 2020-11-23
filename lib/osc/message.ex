@@ -39,7 +39,7 @@ defmodule OSC.Message do
 
   defp split_address(msg) do
     [address_pattern, rest] = String.split(msg, <<0>>, parts: 2)
-    rest = String.lstrip(rest, 0)
+    rest = String.trim_leading(rest, <<0>>)
     {address_pattern, rest}
   end
 
@@ -52,7 +52,8 @@ defmodule OSC.Message do
 
   defp normalize_type_tag(type_tag) do
     type_tag
-    |> String.lstrip(?,)
+    |> String.trim_leading("?")
+    |> String.trim_leading(",")
     |> :binary.bin_to_list()
   end
 
