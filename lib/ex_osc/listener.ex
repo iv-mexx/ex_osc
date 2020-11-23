@@ -16,7 +16,7 @@ defmodule ExOsc.Listener do
     {:ok, socket}
   end
 
-  def handle_info(_msg = {:udp, _socket, _send_ip, _send_port, data}, socket) do
+  def handle_info({:udp, _socket, _send_ip, _send_port, data}, socket) do
     data
     |> OSC.Message.parse()
     |> notify_event_handler

@@ -251,14 +251,14 @@ defmodule OSC.Message do
   defp value_or_zero(value), do: value
 
   defp now_to_sntp_time({_, _, usec} = now) do
-    secsSinceJan1900 =
+    secs_since_jan_1900 =
       bor(
         0x80000000,
         :calendar.datetime_to_gregorian_seconds(:calendar.now_to_universal_time(now)) -
           59_958_230_400
       )
 
-    {secsSinceJan1900, round(usec * bsl(1, 32) / 1_000_000)}
+    {secs_since_jan_1900, round(usec * bsl(1, 32) / 1_000_000)}
   end
 
   defp datetime_to_now(datetime) do

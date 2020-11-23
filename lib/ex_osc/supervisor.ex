@@ -1,6 +1,10 @@
 defmodule ExOsc.Supervisor do
   use Supervisor
 
+  @moduledoc """
+  Supervisor for MessageBuffer, Listener and Sender
+  """
+
   def start_link(args \\ []) do
     Supervisor.start_link(__MODULE__, args)
   end
