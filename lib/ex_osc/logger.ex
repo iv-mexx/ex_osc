@@ -1,23 +1,28 @@
 defmodule ExOsc.Logger do
+  use GenStage
   @moduledoc """
   Simple Logger process that listens for incoming events and inspects them.
   """
 
-  use GenEvent
   require Logger
+  alias ExOsc.MessageBuffer
 
   def start_logger do
-    pid = {__MODULE__, make_ref()}
-    :ok = GenEvent.add_handler(:osc_events, pid, [])
-    {:ok, pid}
+    GenStage.start_link(__MODULE__, :ok)
   end
 
-  def stop_logger(pid) do
-    :ok = GenEvent.remove_handler(:osc_events, pid, [])
+  def init(:ok) do
+    {:consumer, :ok, subscribe_to: [MessageBuffer]}
   end
 
-  def handle_event(event, state) do
-    Logger.info("OSC: #{inspect(event)}")
-    {:ok, state}
+  # def stop_logger(pid) do
+  #   GenStage.cancel(pid, :shutdown)
+  # end
+
+  def handle_events(events, _from, state) do
+    for event <- events do
+      Logger.info("OSC: #{inspect(event)}")
+    end
+    {:noreply, [], state}
   end
 end

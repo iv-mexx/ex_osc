@@ -25,6 +25,6 @@ defmodule ExOsc.Listener do
   end
 
   defp notify_event_handler(msg) do
-    GenEvent.notify(:osc_events, {:osc_event, msg})
+    ExOsc.MessageBuffer.sync_notify({msg})
   end
 end

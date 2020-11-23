@@ -8,7 +8,7 @@ defmodule ExOsc.Supervisor do
   def init(args) do
     children = [
       # Define workers and child supervisors to be supervised
-      worker(GenEvent, [[name: :osc_events]]),
+      worker(ExOsc.MessageBuffer, args),
       worker(ExOsc.Listener, args),
       worker(ExOsc.Sender, args)
     ]

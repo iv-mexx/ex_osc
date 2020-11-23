@@ -20,6 +20,8 @@ defmodule ExOsc.Mixfile do
   end
 
   defp deps do
-    []
+    [
+      {:gen_stage, "~> 1.0"}
+    ]
   end
 end
