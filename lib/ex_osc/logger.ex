@@ -1,5 +1,6 @@
 defmodule ExOsc.Logger do
   use GenStage
+
   @moduledoc """
   Simple Logger process that listens for incoming events and inspects them.
   """
@@ -23,6 +24,7 @@ defmodule ExOsc.Logger do
     for event <- events do
       Logger.info("OSC: #{inspect(event)}")
     end
+
     {:noreply, [], state}
   end
 end

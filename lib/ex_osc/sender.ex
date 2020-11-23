@@ -9,7 +9,7 @@ defmodule ExOsc.Sender do
     GenServer.cast(__MODULE__, {:osc_message, ip_tuple, port, data})
   end
 
-  def start_link do
+  def start_link(_args) do
     GenServer.start_link(__MODULE__, nil, name: __MODULE__)
   end
 
